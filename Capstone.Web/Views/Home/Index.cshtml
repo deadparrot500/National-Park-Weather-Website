@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Capstone.Web.Models.Park>
+
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+
+@foreach (Park park in Model)
+{
+    <div class="desc">
+        <a class="park-image" href="Home/Details/?parkCode=@park.ParkCode" name="picture">
+            <img src="~/images/Parks/@(park.ParkCode.ToLower()).jpg" />
+        </a>
+
+
+        <h2>@park.ParkName</h2>
+        <p>@park.ParkDescription</p>
+    </div>
+
+}

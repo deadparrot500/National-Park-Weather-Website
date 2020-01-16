@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Capstone.Web.Models.SurveyResult>
+
+@{
+    ViewData["Title"] = "SurveyResults";
+}
+
+<h2>National Park Survey Results</h2>
+
+
+<table class="table" id="resultsTable">
+    <thead>
+        <tr>
+            <th>
+               
+            </th>
+            <th class="survey-field" id="tableHead">
+                Park Name
+            </th>
+
+            <th class="survey-field">
+               Number of Votes
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="survey-field">
+                 
+
+                    <img src="~/images/Parks/@(item.ParkCode.ToLower()).jpg" />
+
+                </td>
+                <td class="survey-field">
+                    <h4>
+                    @Html.DisplayFor(modelItem => item.ParkName)
+                    </h4>
+                </td>
+
+                <td class="survey-field">
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

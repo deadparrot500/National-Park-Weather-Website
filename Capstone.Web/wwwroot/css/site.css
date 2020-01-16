@@ -1,0 +1,110 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p{
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.park-image img {
+    float: left;
+    padding: 15px;
+    width: 250px;
+}
+
+#headerImage {
+    width: 35%;
+}
+
+#headerBackground {
+    background-color: darkgreen;
+}
+
+.desc {
+    display: inline-block;
+    flex-wrap: wrap;
+}
+
+#park-detail {
+    padding: 10px;
+}
+
+#park-detail img {
+        float: left;
+        padding: 10px;
+        height: 300px;
+    }
+
+blockquote {
+    clear: both;
+    text-align: center;
+}
+
+.funFacts {
+    clear: both;
+}
+
+.forecast {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 18%;
+}
+
+.forecast img {
+        width: 100%;
+
+}
+
+<<<<<<< HEAD
+.survey-field {
+
+    width: 25%;
+}
+
+    .survey-field img {
+        height: 135px;
+       
+=======
+.forecast h5{
+    padding-left:25%;
+    padding-right: 10%;
+
+}
+
+    .forecast ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+>>>>>>> d70b9594ec8bce736214fd2530846b5994b91baa
+    }
+

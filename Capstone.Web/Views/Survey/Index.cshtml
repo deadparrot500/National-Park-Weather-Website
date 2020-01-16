@@ -1,0 +1,68 @@
+﻿@model Capstone.Web.Models.Survey
+
+@{
+    ViewData["Title"] = "Index";
+    List<SelectListItem> parks = ViewData["ParkList"] as List<SelectListItem>;
+    List<SelectListItem> states = ViewData["States"] as List<SelectListItem>;
+}
+
+<h2>National Park Survey</h2>
+
+<p>At some point we will enter in some poignant paragragh about national parks.</p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SubmitForm" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ParkCode" class="control-label">Favorite National Park</label>
+                <select asp-items="@parks" asp-for="ParkCode" class="form-control">
+                    <option value="">Select your favorite park</option>
+                </select>
+                <span asp-validation-for="ParkCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Your email address</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateOfResidence" class="control-label">State of Residence</label>
+                <select asp-items="@states" asp-for="StateOfResidence" class="form-control">
+                    <option value="">Select the state you live in</option>
+                </select>
+                <span asp-validation-for="StateOfResidence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActivityLevel" class="control-label">Activity Level</label>
+                <div class="radio">
+
+                    <label><input type="radio" asp-for="ActivityLevel" value="inactive">Inactive</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" asp-for="ActivityLevel" value="sedentary">Sedentary</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" asp-for="ActivityLevel" value="active">Active</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" asp-for="ActivityLevel" value="extremelyActive">Extremely Active</label>
+                </div>
+
+
+                <span asp-validation-for="ActivityLevel" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

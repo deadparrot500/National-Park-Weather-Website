@@ -1,0 +1,150 @@
+﻿@model Park
+@{
+    ViewData["Title"] = "Details";
+    List<Weather> weather = TempData["Weather"] as List<Weather>;
+
+    String tempChoice = TempData["TempChoice"] as String;
+
+}
+
+@functions{
+    double convertToC(int Fahrenheit)
+    {
+        double Fah = (double)Fahrenheit;
+        double celsius = (Fah - 32.0) * (5.0 / 9.0);
+        return Math.Round(celsius, 0);
+    }
+}
+
+<div id="weather">
+    <div id="park-detail">
+        <img src="/images/Parks/@(Model.ParkCode.ToLower()).jpg" />
+        <div class="park-description">
+            <h3><b>@Model.ParkName</b></h3>
+            <p>
+                Location: @Model.State<br />
+                Climate: @Model.Climate<br />
+                Entry Fee: $@Model.EntryFee
+            </p>
+
+            <p>@Model.ParkDescription</p>
+            <br />
+        </div>
+
+        <div class="funFacts">
+            <h4><b>Fun Facts:</b></h4>
+            <ul>
+                <li>@Model.ParkName has approximately @Model.Acreage acres to explore!</li>
+                <li>The park was founded in the year @Model.YearFounded.</li>
+                <li>Average elevation is @Model.ElevationInFeet feet.</li>
+                <li>Approximately @Model.NumberOfAnimalSpecies species of animals call this park home!</li>
+                <li>There are @Model.MilesOfTrails miles of trails to enjoy within the park, please pack out what you bring in.</li>
+                <li>If you are interested in camping, feel free to enjoy one of the @Model.NumberOfCampsites campsites that are within @Model.ParkName.</li>
+                <li>Each year, @Model.AnnualVisitorCount visitors come to visit the park.</li>
+
+            </ul>
+        </div>
+        <br />
+
+        <blockquote>
+            @Model.InspirationalQuote<br />
+            <cite>@Model.InspirationalQuoteSource</cite>
+        </blockquote>
+
+    </div>
+
+    <h2>Weather Forecast:</h2>
+
+    <span>
+        <a href="?parkCode=@Model.ParkCode&tempType=Fahrenheit" class="btn btn-success">Fahrenheit</a>
+        <a href="?parkCode=@Model.ParkCode&tempType=Celsius" class="btn btn-success">Celsius</a>
+    </span>
+    <br />
+
+    @foreach (Weather instance in weather)
+    {
+        <div class="forecast">
+            @if (instance.ForecastValue == 1)
+            {
+                <h5><b>Today</b></h5>
+            }
+            else if (instance.ForecastValue == 2)
+            {
+                <h5><b>Tomorrow</b></h5>
+            }
+            else if (instance.ForecastValue == 3)
+            {
+                <h5><b>Two Days Out</b></h5>
+            }
+            else if (instance.ForecastValue == 4)
+            {
+                <h5><b>Three Days Out</b></h5>
+            }
+            else if (instance.ForecastValue == 5)
+            {
+                <h5><b>Four Days Out</b></h5>
+            }
+
+            @if (@instance.Forecast == "partly cloudy")
+            {
+                <img src="~/images/weather/partlyCloudy.png" />
+            }
+            else
+            {
+                <img src="~/images/weather/@(instance.Forecast).png" />
+            }
+
+
+            
+                @if (tempChoice == "Fahrenheit")
+                {
+                    @*<p>Temperature in F:</p>*@
+                <p><b>High:</b> @(instance.HighTemp) &#8457</p>
+                <p><b>Low:</b> @instance.LowTemp &#8457</p>
+                }
+                else
+                {
+                    @*<p>Temperature in C:</p>*@
+                    <p><b>High:</b> @(convertToC(instance.HighTemp)) &#8451</p>
+                    <p><b>Low:</b> @(convertToC(instance.LowTemp)) &#8451</p>
+                }
+
+                <h6><b>Advisories:</b></h6>
+                <ul>
+                    @if (instance.Forecast == "snow")
+                    {
+                        <li>Snowshoes</li>
+                    }
+                    else if (instance.Forecast == "rain")
+                    {
+                        <li>Raingear and waterproof shoes</li>
+                    }
+                    else if (instance.Forecast == "thunderstorms")
+                    {
+                        <li>Seek shelter (avoid exposed ridges)</li>
+
+                    }
+                    else if (instance.Forecast == "sun")
+                    {
+                        <li>Sunblock</li>
+                    }
+
+                    @if (instance.HighTemp > 75)
+                    {
+                        <li>Extra gallon of water</li>
+                    }
+                    else if (instance.LowTemp < 20)
+                    {
+                        <li>Etreme Colds - be aware of frigid temps</li>
+                    }
+
+                    @if (instance.HighTemp - instance.LowTemp >= 20)
+                    {
+
+                        <li>Breathable layers</li>
+                    }
+                </ul>
+
+        </div>
+    }
+</div>
